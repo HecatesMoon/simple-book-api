@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.hecatesmoon.book_api.dto.BookRequest;
 import com.hecatesmoon.book_api.dto.BookResponse;
+import com.hecatesmoon.book_api.exception.BookNotFoundException;
 import com.hecatesmoon.book_api.model.Book;
 import com.hecatesmoon.book_api.repository.BooksRepository;
 
@@ -20,7 +21,7 @@ public class BooksService {
     }
 
     BookResponse findById(Long id){
-        Book book = booksRepository.findById(id).orElseThrow();
+        Book book = booksRepository.findById(id).orElseThrow(() -> new BookNotFoundException("The book was not found, id: " + id) );
         return BookResponse.from(book);
     }
 
