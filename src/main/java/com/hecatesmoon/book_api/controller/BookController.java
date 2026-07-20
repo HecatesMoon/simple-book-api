@@ -60,7 +60,7 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BookResponse> putMethodName(@PathVariable Long id, @Valid @RequestBody BookRequest bookRequest) {
+    public ResponseEntity<BookResponse> updateBook(@PathVariable Long id, @Valid @RequestBody BookRequest bookRequest) {
         
         BookResponse response = booksService.update(id, bookRequest);
         
