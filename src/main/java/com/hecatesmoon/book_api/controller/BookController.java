@@ -53,6 +53,7 @@ public class BookController {
     public ResponseEntity<Map<String, String>> deleteBook(@PathVariable Long id){
         Map<String, String> response = new HashMap<>();
         response.put("message", "the book (id "+id+") was deleted succesfully");
+        booksService.delete(id);
         return ResponseEntity.ok(response);
     }
 
