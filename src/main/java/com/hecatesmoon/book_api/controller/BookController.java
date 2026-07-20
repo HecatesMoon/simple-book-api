@@ -27,7 +27,7 @@ public class BookController {
 
     private final BooksService booksService;
 
-    BookController (BooksService booksService){
+    public BookController (BooksService booksService){
         this.booksService = booksService;
     }
 
