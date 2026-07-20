@@ -36,4 +36,17 @@ public class BooksService {
     public void delete(Long id){
         booksRepository.deleteById(id);
     }
+
+    //TODO: read more about @Transactional
+    public BookResponse update(Long id, BookRequest r){
+        Book book = booksRepository.findById(id).orElseThrow(() -> new BookNotFoundException("The book was not found, id: " + id));
+        Book newBook = BookRequest.toEntity(r);
+
+        newBook.setId(id);
+        newBook.setCreatedAt(book.getCreatedAt());
+        newBook.setUpdatedAt(book.getUpdatedAt());
+
+        newBook = booksRepository.save(newBook);
+        return BookResponse.from(newBook);
+    }
 }
