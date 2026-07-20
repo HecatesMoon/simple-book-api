@@ -40,13 +40,12 @@ public class BooksService {
     //TODO: read more about @Transactional
     public BookResponse update(Long id, BookRequest r){
         Book book = booksRepository.findById(id).orElseThrow(() -> new BookNotFoundException("The book was not found, id: " + id));
-        Book newBook = BookRequest.toEntity(r);
 
-        newBook.setId(id);
-        newBook.setCreatedAt(book.getCreatedAt());
-        newBook.setUpdatedAt(book.getUpdatedAt());
+        book.setAuthor(r.getAuthor());
+        book.setTitle(r.getTitle());
+        book.setPages(r.getPages());
 
-        newBook = booksRepository.save(newBook);
-        return BookResponse.from(newBook);
+        book = booksRepository.save(book);
+        return BookResponse.from(book);
     }
 }
